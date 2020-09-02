@@ -1,8 +1,8 @@
 # MisterSquashfs
-This kernel adds squashfs support, enabling you to compress roms using gzip, lzma, lz4, or zstd, transparently and without needing any modifications to cores.
+This kernel adds squashfs support, enabling you to compress roms using gzip, lzma, lz4, xz, or zstd, transparently and without needing any modifications to cores.
 
 If you are using windows and need gensquashfs, https://github.com/AgentD/squashfs-tools-ng<br/>
-Otherwise install it in linux through your package manager, for example "sudo apt-get install squashfs-tools-ng"
+Otherwise install genisofs in linux through your package manager, for example "sudo apt-get install squashfs-tools-ng"
 
 To limit the number of symbolic links made, take a ROM pack and first put it in an empty folder. In this example, it's called compress.
 
@@ -17,14 +17,16 @@ du -sh Super\ EverDrive\ \&\ SD2SNES/ super_everdrive_and_sd2snes.img<br/>
 mkdir compress<br/>
 mv NeoGeo compress/<br/>
 gensquashfs -D compress -c xz -b 1048576 neogeo.img<br/>
-mv compress/NeoGeo ./<br/>
-du -sh NeoGeo neogeo.img<br/>
+mv compress/NeoGeo/ ./<br/>
+du -sh NeoGeo/ neogeo.img<br/>
 7.3G    NeoGeo/<br/>
 1.8G    neogeo.img<br/>
 
-upload img files to /media/fat/squashfs/SNES/ and /media/fat/squashfs/NeoGeo/, respectively. You will have to create these folders yourself first.<br/>
-upload squashfs_mount.sh to /media/fat/Scripts, you will have to run this yourself after every hard reset or power on.<br/>
-upload zImage_dtb to /media/fat/linux/, preferably after renaming the original zImage_dtb to zImage_dtb.bak. This will be wiped out the next time the kernel is updated. Contact me on discord, preferably after joining the classic gaming discord so the DM will go through or so you can tag me in a MiSTer room (Johnny Love#0896) if this happens and my github hasn't been updated with a new kernel containing squashfs support.
+To install the modified kernel, simply download https://github.com/MiSTerJohnnyLove/MiSTerSquashfs/raw/master/squashfs_update.sh and put it in your scripts folder. You will probably have to run it once every few months to keep the non-default MiSTer kernel up to date.<br/>
+
+upload squash img files to /media/fat/squashfs/CORENAME/ The install script will create these for you.<br/>
+squashfs_mount.sh will be added to /media/fat/Scripts, but it should run by default at boot.<br/>
+zImage_dtb will be installed by squashfs_update.sh and allows the use of squashfs image. This will be wiped out the next time the kernel is updated. Contact me on discord, preferably after joining the classic gaming discord so the DM will go through or so you can tag me in a MiSTer room (Johnny Love#0896) if this happens and my github hasn't been updated with a new kernel containing squashfs support. If it has, re-running squashfs_update.sh should solve the problem.
 
 For more information, see https://misterfpga.org/viewtopic.php?f=27&t=965 and https://redd.it/ibl8j3
 
