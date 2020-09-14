@@ -1,5 +1,8 @@
 # MisterSquashfs
-This kernel adds squashfs support, enabling you to compress roms using gzip, lzma, lz4, xz, or zstd, transparently and without needing any modifications to cores.
+
+NOTE: to run squashfs_update.sh you first need to run security_fixes.sh (included with MiSTer) and install CA certificates/ssl. If that script doesn't work for you, type "hostname MiSTer" before running it.<br/>
+
+This kernel adds squashfs support, enabling you to compress roms using gzip, lzma, lz4, xz, or zstd, transparently and without needing any modifications to cores.<br/>
 
 If you are using windows and need gensquashfs, https://github.com/AgentD/squashfs-tools-ng<br/>
 Otherwise install genisofs in linux through your package manager, for example "sudo apt-get install squashfs-tools-ng"
